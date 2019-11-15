@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/shuup/shuup-api.svg?branch=master)](https://travis-ci.org/shuup/shuup-api)
+
 # Shuup REST Framework
 
 `shuup_api` exposes SHUUP APIs as RESTful url endpoints.
