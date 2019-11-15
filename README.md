@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/shuup/shuup-api.svg?branch=master)](https://travis-ci.org/shuup/shuup-api)
+[![codecov](https://codecov.io/gh/shuup/shuup-api/branch/master/graph/badge.svg)](https://codecov.io/gh/shuup/shuup-api)
+[![PyPI](https://img.shields.io/pypi/v/shuup-api.svg)](https://pypi.org/project/shuup-api/)
 
 # Shuup REST Framework
 
