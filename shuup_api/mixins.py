@@ -30,13 +30,13 @@ class ProtectedModelViewSetMixin(object):
             return super(ProtectedModelViewSetMixin, self).destroy(request, *args, **kwargs)
         except ProtectedError as exc:
             ref_obj = exc.protected_objects[0].__class__.__name__
-            msg = "This object can not be deleted because it is referenced by {}".format(ref_obj)
+            msg = "Error! This object can not be deleted because it is referenced by {}.".format(ref_obj)
             return Response(data={"error": msg}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class SearchableMixin(object):
     """
-    Mixin to give search capabilities for `ViewSet`
+    Mixin to give search capabilities for `ViewSet`.
     """
     filter_backends = (SearchFilter,)
     search_fields = ("=id",)

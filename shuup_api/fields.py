@@ -27,9 +27,9 @@ class EnumField(serializers.ChoiceField):
     def __init__(self, enum, lenient=False, ints_as_names=False, **kwargs):
         """
         :param enum: The enumeration class.
-        :param lenient: Whether to allow lenient parsing (case-insensitive, by value or name)
+        :param lenient: Whether to allow lenient parsing (case-insensitive, by value or name).
         :type lenient: bool
-        :param ints_as_names: Whether to serialize integer-valued enums by their name, not the integer value
+        :param ints_as_names: Whether to serialize integer-valued enums by their name, not the integer value.
         :type ints_as_names: bool
         """
         self.enum = enum
@@ -49,7 +49,7 @@ class EnumField(serializers.ChoiceField):
                 return instance.name.lower()
             return instance.value
         except ValueError:
-            raise ValueError('Invalid value [%r] of enum %s' % (instance, self.enum.__name__))
+            raise ValueError('Error! Invalid value [%r] of enum %s.' % (instance, self.enum.__name__))
 
     def to_internal_value(self, data):
         if isinstance(data, self.enum):
@@ -86,26 +86,26 @@ class TypedContentFile(ContentFile):
 class Base64FileField(serializers.FileField):
     """
     Inspired in https://github.com/Hipo/drf-extra-fields/blob/master/drf_extra_fields/fields.py
-    But here we use the media type from the header to guess the file type
+    But here we use the media type from the header to guess the file type.
     """
     def to_internal_value(self, base64_data):
         if not isinstance(base64_data, six.string_types):
-            raise ValidationError("This is not a base64 string")
+            raise ValidationError("Error! This is not a base64 string.")
 
         elif ';base64,' not in base64_data:
-            raise ValidationError("base64 files must have media type defined.")
+            raise ValidationError("Error! Proper base64 files must have a media type defined.")
 
         header, base64_data = base64_data.split(';base64,')
 
         try:
             decoded_file = base64.b64decode(base64_data)
         except (TypeError, binascii.Error):
-            raise ValidationError("Invalid file.")
+            raise ValidationError("Error! Invalid file.")
 
         media_type = header[len("data:"):]  # remove data: from the start of the string
         extension = mimetypes.guess_extension(media_type, strict=False)
         if not extension:
-            raise ValidationError("Media type not recognized.")
+            raise ValidationError("Error! Media type was not recognized.")
 
         file_name = "{0}{1}".format(uuid.uuid4(), extension)
         data = TypedContentFile(decoded_file, media_type, name=file_name)
@@ -117,7 +117,7 @@ class Base64FileField(serializers.FileField):
             with open(file.path, 'rb') as f:
                 return "data:{0};base64,{1}".format(mime_type, base64.b64encode(f.read()).decode())
         except Exception:
-            raise IOError("Error encoding file")
+            raise IOError("Error! Error during file encoding.")
 
 
 class FormattedDecimalField(serializers.DecimalField):
