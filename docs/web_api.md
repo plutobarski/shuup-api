@@ -28,9 +28,11 @@ REST_FRAMEWORK = {
 Now just add the API to your root urlconf.
 
 ```py
+   from django.conf import settings
+
    urlpatterns = [
        # ...
-       url(r'^api/', include('shuup_api.urls')),
+       url(r'^api/', include('shuup_api.urls', namespace=settings.SHUUP_API_URLS_NAMESPACE)),
    ]
 ```
 
