@@ -48,7 +48,7 @@ in the DRF `DEFAULT_PERMISSION_CLASSES` setting.
 
 Our permission class will read your configuration set through admin and will apply it on the selected endpoints.
 
-**Important**: Not only the access of the endpoint will be restricted but also the API documentation it provides will be restricted.
+**Important**: Not only the access of the endpoint will be restricted, but also the API documentation it provides will be restricted.
 
 The available access levels are:
 

@@ -28,6 +28,6 @@ class AppConfig(shuup.apps.AppConfig):
         rest_framework_config = getattr(settings, "REST_FRAMEWORK", None)
         if not (rest_framework_config and rest_framework_config.get("DEFAULT_PERMISSION_CLASSES")):
             raise ImproperlyConfigured(
-                "`shuup_api` REQUIRES explicit configuration of `REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES']` "
+                "Error! `shuup_api` REQUIRES explicit configuration of `REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES']` "
                 "in your settings file. This is to avoid all of your shop's orders being world-readable-and-writable."
             )
