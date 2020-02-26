@@ -21,4 +21,4 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 def populate_api(router):
-    router.register("test/user", UserViewSet)
+    router.register("test/user", UserViewSet, base_name="users")
