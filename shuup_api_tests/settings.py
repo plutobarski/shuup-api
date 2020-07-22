@@ -9,7 +9,9 @@ from shuup_workbench.settings.utils import get_disabled_migrations
 from shuup_workbench.test_settings import *  # noqa
 
 INSTALLED_APPS = list(locals().get('INSTALLED_APPS', [])) + [
+    'shuup_api',
     'shuup_api_test_app',
+    'rest_framework.authtoken'
 ]
 
 DATABASES = {
@@ -30,12 +32,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'shuup_api.authentication.ExpiringTokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'shuup_api.permissions.ShuupAPIPermission',
     )
-}
-JWT_AUTH = {
-    'JWT_ALLOW_REFRESH': True
 }

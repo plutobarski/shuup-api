@@ -12,3 +12,4 @@
 #   url(r'^api/', include('shuup_api.urls', namespace=settings.SHUUP_API_URLS_NAMESPACE)),
 #:
 SHUUP_API_URLS_NAMESPACE = ""
+SHUUP_API_TOKEN_AGE = 12

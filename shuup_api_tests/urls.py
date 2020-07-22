@@ -10,5 +10,5 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     url(r'^api/', include('shuup_api.urls', namespace=settings.SHUUP_API_URLS_NAMESPACE)),
-    url(r'^sa/', include('shuup.admin.urls', namespace="shuup_admin", app_name="shuup_admin")),
+    url(r'^sa/', include('shuup.admin.urls', namespace="shuup_admin")),
 ]
