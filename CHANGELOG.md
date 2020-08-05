@@ -12,6 +12,14 @@ Enter here all the changes made to the development version
 
 Improve descriptions, help texts, error messages, etc
 
+
+## [2.0.0] - 2020-08-05
+
+Add Shuup 2.0 support. Not backwards compatible with 1.x version.
+
+For patching old releases use "shuup1" branch.
+
+
 ## [1.0.1] - 2020-02-26
 
 ### Added
