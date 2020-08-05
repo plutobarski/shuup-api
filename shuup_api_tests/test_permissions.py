@@ -72,7 +72,9 @@ def test_api_permissions_anonymous():
     # set API admin only - not a chance
     config.set(None, permission_key, PermissionLevel.ADMIN)
     assert client.get("/api/test/user/").status_code == status.HTTP_401_UNAUTHORIZED
-    assert client.put("/api/test/user/", user_data[0]).status_code == status.HTTP_401_UNAUTHORIZED
+
+    # Remove None values before posting data since posting None data is not cool
+    assert client.put("/api/test/user/", {k: v for k, v in user_data[0].items() if v is not None}).status_code == status.HTTP_401_UNAUTHORIZED
 
 
 @pytest.mark.django_db
