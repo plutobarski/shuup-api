@@ -8,6 +8,7 @@
 
 from rest_framework import permissions
 from shuup import configuration
+from shuup.core.shop_provider import get_shop
 
 
 class PermissionLevel(object):
@@ -47,8 +48,9 @@ class ShuupAPIPermission(permissions.BasePermission):
             permission = DEFAULT_PERMISSION
 
         # god mode - just works if API is not disabled
-        if request.user.is_superuser:
-            return (permission <= PermissionLevel.ADMIN)
+        if request.user.is_authenticated:
+            if request.user.is_superuser or get_shop(request).staff_members.filter(pk=request.user.pk).exists():
+                return (permission <= PermissionLevel.ADMIN)
 
         # safe requests: GET, HEAD, OPTIONS
         if request.method in permissions.SAFE_METHODS:

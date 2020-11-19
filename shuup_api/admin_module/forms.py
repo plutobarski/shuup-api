@@ -20,7 +20,7 @@ from shuup_api import urls as api_urls
 class APIPermissionForm(forms.Form):
     API_PERMISSION_CHOICES = (
         (PermissionLevel.DISABLED, _("Disabled")),
-        (PermissionLevel.ADMIN, _("Admin Users")),
+        (PermissionLevel.ADMIN, _("Staff Users")),
         (PermissionLevel.AUTHENTICATED_WRITE, _("Authenticated Users - Read/Write")),
         (PermissionLevel.AUTHENTICATED_READ, _("Authenticated Users - Read only")),
         (PermissionLevel.PUBLIC_WRITE, _("Public Users - Read/Write")),
@@ -44,10 +44,12 @@ class APIPermissionForm(forms.Form):
             else:
                 help_text = viewset_instance.get_view_description()
 
-            self.fields[field_name] = forms.ChoiceField(label=(viewset_instance.get_view_name() or basename),
-                                                        help_text=help_text,
-                                                        initial=initial, required=False,
-                                                        choices=self.API_PERMISSION_CHOICES)
+            self.fields[field_name] = forms.ChoiceField(
+                label=(viewset_instance.get_view_name() or basename),
+                help_text=help_text,
+                initial=initial, required=False,
+                choices=self.API_PERMISSION_CHOICES
+            )
 
     def save(self):
         """ Store the fields in configuration """

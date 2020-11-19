@@ -16,6 +16,11 @@ from shuup.admin.utils.urls import admin_url
 class APIModule(AdminModule):
     name = _("API")
 
+    def get_extra_permissions(self):
+        return [
+            "api.docs"
+        ]
+
     def get_urls(self):
         return [
             admin_url(
