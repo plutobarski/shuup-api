@@ -6,7 +6,7 @@
 # This source code is licensed under the OSL-3.0 license found in the
 # LICENSE file in the root directory of this source tree.
 from django.utils.encoding import smart_text
-from rest_framework import serializers
+from rest_framework import permissions, serializers
 from rest_framework.compat import coreapi
 from rest_framework.response import Response
 from rest_framework.schemas import SchemaGenerator
@@ -14,6 +14,7 @@ from rest_framework.schemas.coreapi import AutoSchema, field_to_schema
 from rest_framework.utils.formatting import dedent
 from rest_framework.views import APIView
 from rest_framework_swagger import renderers
+from shuup.admin.utils.permissions import has_permission
 
 
 class ShuupAPISchema(AutoSchema):
@@ -76,11 +77,19 @@ class JSONOpenAPIRenderer(renderers.OpenAPIRenderer):
     media_type = 'application/json'
 
 
+class DocsPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return has_permission(request.user, "api.docs")
+
+
 class SwaggerSchemaView(APIView):
     renderer_classes = [
         renderers.OpenAPIRenderer,
         renderers.SwaggerUIRenderer,
         JSONOpenAPIRenderer
+    ]
+    permission_classes = [
+        DocsPermission
     ]
 
     def get(self, request):

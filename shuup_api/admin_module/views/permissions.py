@@ -18,5 +18,5 @@ class APIPermissionView(FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, _("Sucecss! API permissions saved."))
+        messages.success(self.request, _("Success! API permissions saved."))
         return redirect("shuup_admin:api_permission")

@@ -10,8 +10,8 @@ Enter here all the changes made to the development version
 
 ### Changed
 
-Improve descriptions, help texts, error messages, etc
-
+- Allow staff members to see the documentation view
+- Improve descriptions, help texts, error messages, etc
 
 ## [2.0.0] - 2020-08-05
 
